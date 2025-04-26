@@ -58,7 +58,7 @@ export default function IncidentDetails({ params }: { params: Promise<{ id: stri
           <div className="p-6 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-700">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <h1 className="text-2xl font-bold text-white">{incident.title}</h1>
-              <div className={`px-4 py-1.5 rounded-full text-sm font-medium shadow-inner ${getSeverityColor(incident.severity)}`}>
+              <div className={`px-4 py-1.5 rounded text-sm font-medium shadow-inner ${getSeverityColor(incident.severity)}`}>
                 {incident.severity}
               </div>
             </div>
