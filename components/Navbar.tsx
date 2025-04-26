@@ -4,7 +4,7 @@ import IncidentForm from './IncidentForm';
 
 function Navbar() {
   return (
-    <div className="w-full px-4 flex justify-between items-center gap-4 p-2 bg-black relative z-10">
+    <div className="w-full px-4 flex justify-between items-center gap-4 p-2  relative z-10">
       <div className="text-2xl font-extrabold text-amber-500">
         <span className="text-white">AI</span> Dashboard
       </div>
