@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Pagination from './Pagination';
 import { useIncidents } from './Context';
-import Filters from './Filters'; // 👈 Import new Filters component
+import Filters from './Filters'; 
 
 const ITEMS_PER_PAGE = 5;
 
@@ -15,23 +15,20 @@ export default function IncidentTable() {
   const [selectedSeverity, setSelectedSeverity] = useState('All');
   const [selectedSortOrder, setSelectedSortOrder] = useState('Newest');
 
-  // Step 1: Filter
-  let filteredData = selectedSeverity === 'All'
+  const filteredData = selectedSeverity === 'All'
     ? [...data]
     : data.filter(incident => incident.severity.toLowerCase() === selectedSeverity.toLowerCase());
 
-  // Step 2: Sort
   filteredData.sort((a, b) => {
     const dateA = new Date(a.reported_at).getTime();
     const dateB = new Date(b.reported_at).getTime();
     if (selectedSortOrder === 'Newest') {
-      return dateB - dateA; // Newest first
+      return dateB - dateA; 
     } else {
-      return dateA - dateB; // Oldest first
+      return dateA - dateB;
     }
   });
 
-  // Step 3: Paginate
   const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
   const paginatedData = filteredData.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -70,7 +67,6 @@ export default function IncidentTable() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      {/* 👇 Add Filters component */}
       <Filters
         selectedSeverity={selectedSeverity}
         onSeverityChange={(severity) => {
