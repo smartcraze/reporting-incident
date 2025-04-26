@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useIncidents } from './Context';
+import { createPortal } from 'react-dom';
 
 export default function IncidentForm() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +15,6 @@ export default function IncidentForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!title || !description) {
       toast.error('All fields are required!');
       return;
@@ -30,30 +30,26 @@ export default function IncidentForm() {
 
     addIncident(newIncident);
 
-    // clean up the form
     setTitle('');
     setDescription('');
     setSeverity('Low');
-    setIsOpen(false); // close modal after submit
+    setIsOpen(false);
 
     toast.success('Incident reported successfully!');
   };
 
   return (
-    <div className="">
-     
+    <div>
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded shadow-md transition-transform hover:scale-105 mr-6"
+        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded shadow-md transition-transform hover:scale-105"
       >
         Report Incident
       </button>
 
-     
-      {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center  bg-opacity-20 backdrop-blur-sm z-50" >
-          
-          
+      {/* Modal */}
+      {isOpen && createPortal(
+        <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50">
           <div className="bg-slate-200 text-black rounded-xl p-8 shadow-lg w-full max-w-sm transform transition-all duration-300 scale-100">
             <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">Report New Incident</h2>
 
@@ -110,8 +106,17 @@ export default function IncidentForm() {
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body // PORTAL HERE
       )}
     </div>
   );
 }
+
+
+
+/*
+
+Modal should always be rendered at the top-level (<body>), not nested inside components (like Navbar).
+
+*/

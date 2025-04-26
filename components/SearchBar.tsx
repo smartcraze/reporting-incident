@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useIncidents } from './Context';
+import React from 'react';
 
 export default function SearchBar() {
   const { searchTerm, setSearchTerm, filteredResults } = useIncidents();
@@ -34,7 +35,8 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto relative">
+    <div className="w-full max-w-lg mx-auto relative z-[1000]">
+      {/* Search Input */}
       <div className="relative">
         <input
           type="text"
@@ -53,9 +55,9 @@ export default function SearchBar() {
         )}
       </div>
 
-      {/* Make the search results absolute and float over the page */}
+      {/* Search Results Dropdown */}
       {searchTerm && (
-        <div className="absolute top-full mt-2 w-full bg-white rounded shadow-lg max-h-64 overflow-y-auto z-50">
+        <div className="absolute top-full mt-2 w-full bg-white rounded shadow-lg max-h-64 overflow-y-auto z-[1000] border border-gray-300">
           {filteredResults.length === 0 ? (
             <p className="text-center text-gray-500 p-2">No incidents found.</p>
           ) : (

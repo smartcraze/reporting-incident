@@ -3,6 +3,7 @@
 import { use } from 'react';  
 import { useRouter } from 'next/navigation';
 import { useIncidents } from '@/components/Context';
+import { Metadata } from 'next';
 
 export default function IncidentDetails({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);  
@@ -61,3 +62,8 @@ export default function IncidentDetails({ params }: { params: Promise<{ id: stri
     </>
   );
 }
+
+const metadata: Metadata = {
+  title: "Incident Details",
+  description: "View details of the selected incident",
+};
